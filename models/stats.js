@@ -361,6 +361,25 @@ statsSchema.statics.setStvUrl = function (matchId, url, cb) {
   });
 };
 
+statsSchema.statics.findMatchesFromPlayerIfLive = function(steamId, limit, cb) {
+  var query = Stats.find({'players.steamid': steamId});
+  var countQuery = Statis.find({'players.steamid':steamId}).lean().count();
+  query
+  .sort({_id:-1})
+  .limit(limit)
+  .select('isLive')
+  .lean()
+  .exec(function(err, matches) {
+    if (err) { 
+	  return cb(err);
+	}
+	countQuery.exec(function(err, count) {
+	  return cb(err, matches, count);
+	});
+  });
+};
+	
+  
 
 statsSchema.statics.findMatchesBySteamId = function(steamId, skip, limit, cb) {
   var query = Stats.find({ 'players.steamid': steamId });

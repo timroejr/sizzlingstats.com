@@ -118,6 +118,31 @@ var player = function(req, res) {
   });
 };
 
+var livePlayerMatches = function(req, res) {
+  var steamid = req.params.id;
+  Player.findOne({numericid: id}, function{err, player) {
+    if (err) {
+	  console.log(err);
+	  console.trace(err);
+	}
+	
+	if (err || !player) [
+	  return res.send(404);
+	}
+	
+	Stats.findMatchesFromPlayerIfLive(player._id, 1, function(err, matches, count) {
+	  if (err) {
+	    console.log(err);
+	    console.trace(err);
+      }
+	  
+	  res.json({player: player, matches: matches, count: count});
+	});
+	
+  });
+};
+  
+
 var playerMatches = function(req, res) {
   var steamid = req.params.id;
   var current = parseInt(req.query['currentmatch'], 10);
