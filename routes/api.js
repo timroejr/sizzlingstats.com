@@ -121,7 +121,7 @@ var player = function(req, res) {
 
 var livePlayerMatches = function(req, res) {
   var steamid = req.params.id;
-  Player.findOne({numericid: id}, function{err, player) {
+  Player.findOne({numericid: id}, function(err, player) {
     if (err) {
 	  console.log(err);
 	  console.trace(err);
