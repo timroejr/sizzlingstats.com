@@ -126,7 +126,7 @@ var livePlayerMatches = function(req, res) {
 	  console.log(err);
 	  console.trace(err);
 	}
-	if (err || !player) [
+	if (err || !player) {
 	  return res.send(404);
 	}
 	
