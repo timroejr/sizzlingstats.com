@@ -15,6 +15,7 @@ module.exports = function(app) {
   app.get('/api/player/:id', player);
   app.get('/api/player/:id/matches', playerMatches);
   app.get('/api/playersearch', playerSearch);
+  app.get('/api/player/:id/live', livePlayerMatches);
 
   app.get('/api/settings', isLoggedIn, settingsShow);
   app.get('/api/generateKey', isLoggedIn, generateKey);
